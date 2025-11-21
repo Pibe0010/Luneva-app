@@ -1,51 +1,102 @@
-# Welcome to your Expo app 👋
+# 🌙 Luneva App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Handmade soap e-commerce — React Native + Expo
 
-## Get started
+# 📌 Description
 
-1. Install dependencies
+Luneva App is a mobile application developed with Expo and React Native for managing and browsing a catalog of handcrafted products.
+It includes an advanced search engine, modern navigation with Expo Router, product views, and login/registration features.
 
-   ```bash
-   npm install
-   ```
+This project is designed to be clean, modular, and scalable, with a strong focus on user experience.
 
-2. Start the app
+# 🔗 Repository
 
-   ```bash
-   npx expo start
-   ```
+👉 GitHub: https://github.com/Pibe0010/Luneva-app
 
-In the output, you'll find options to open the app in a
+👉 Author: https://github.com/Pibe0010
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+✨ Main Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+🟣 Real-time product search
 
-## Get a fresh project
+🟣 Purchase products
 
-When you're ready, run:
+🟣 Navigation with Expo Router (tabs + stack screens)
 
-```bash
-npm run reset-project
-```
+🟣 Detailed product view
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+🟣 Modern dark design
 
-## Learn more
+🟣 Compatible with iOS, Android, and Web
 
-To learn more about developing your project with Expo, look at the following resources:
+🟣 External API consumption for products and images
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+🟣 User side menu (login / logout / register)
 
-## Join the community
+🟣 Reusable and styled components with Styled Components
 
-Join our community of developers creating universal apps.
+# 🧱 Technologies Used
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# Luneva-app
+Technology Use
+React Native Main mobile app
+Expo Development, deployment, native libraries
+Expo Router Advanced navigation
+TanStack Query Fetch + data caching
+Styled Components Modern styles
+Node + MySQL (Custom backend) Product API
+react-native-dropdown-picker Interactive menus
+📲 Installation and execution
+
+Clone the repo:
+
+git clone https://github.com/Pibe0010/Luneva-app
+cd Luneva-app
+
+Install dependencies:
+
+npm install
+
+Start the project:
+
+npx expo start
+
+Scan the QR code with the Expo Go app or launch an emulator.
+
+🧩 Project Structure
+Luneva-app/
+│
+├── app/ # Main routes with Expo Router
+│ ├── (tabs)/ # Tabbed navigation
+│ ├── searchProduct/ # Search
+│ ├── product/[id]/ # Product view
+│ └── login/ # Authentication
+│
+├── components/ # Reusable UI
+├── hooks/ # Fetch and logic
+├── style/ # Global styles
+└── assets/ # Images, icons
+
+🔧 Useful Scripts
+npm run start # Starts the Expo server
+npm run android # Runs in an Android emulator
+npm run ios # Runs in an emulator iOS
+npm run web # Run the app in a browser
+
+# Details
+
+💡 Pending or future improvements
+
+🟢 Integrate real-time authentication with tokens
+
+🟢 Functional shopping cart
+
+🟢 Improve animations and transitions
+
+🟣 Dedicated dashboard for administrators
+
+🟣 Push notifications with Expo
+
+#🧑‍💻 Author
+Pibe0010
+
+🔗 GitHub: https://github.com/Pibe0010
