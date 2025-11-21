@@ -1,12 +1,12 @@
 export const LightTheme = {
   color: {
-    primary: "#6200ee",
+    primary: "#7507f3",
     secondary: "#03dac6",
     Background: "#f5f5f5",
-    text: "#000000",
+    text: "#0f0e0e",
     button: {
       Background: "#6200ee",
-      Text: "#ffffff",
+      Text: "#0f0e0e",
     },
   },
   fonts: {
@@ -18,13 +18,13 @@ export const LightTheme = {
 
 export const DarkTheme = {
   color: {
-    primary: "#bb86fc",
+    primary: "#7507f3",
     secondary: "#03dac6",
-    Background: "#121212",
-    text: "#fffffff",
+    Background: "#0f0e0e",
+    text: "#ffffff",
     button: {
       Background: "#bb86fc",
-      Text: "#000000",
+      Text: "#ffffff",
     },
   },
   fonts: {
