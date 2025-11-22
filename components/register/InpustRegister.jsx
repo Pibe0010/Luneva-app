@@ -1,6 +1,15 @@
 import Styled from "styled-components/native";
 
-export function InputRegister() {
+export function InputRegister({
+  name,
+  setName,
+  lasName,
+  setlastName,
+  email,
+  setEmail,
+  pass,
+  setPass,
+}) {
   return (
     <Inputcontainer>
       <InputText
@@ -8,23 +17,31 @@ export function InputRegister() {
         placeholderTextColor="#ffffff"
         keyboardType="text"
         autoCapitalize="none"
+        onChangeText={setName}
+        value={name}
       />
       <InputText
         placeholder="Last Name"
         placeholderTextColor="#ffffff"
         keyboardType="text"
         autoCapitalize="none"
+        onChangeText={setlastName}
+        value={lasName}
       />
       <InputText
         placeholder="E-mail"
         placeholderTextColor="#ffffff"
         keyboardType="email-address"
         autoCapitalize="none"
+        onChangeText={setEmail}
+        value={email}
       />
       <InputPass
         placeholder="Password"
         placeholderTextColor="#ffffff"
         secureTextEntry={true}
+        onChangeText={setPass}
+        value={pass}
       />
     </Inputcontainer>
   );
