@@ -1,30 +1,60 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
+import { useState } from "react";
+import { ActivityIndicator } from "react-native";
 import Styled from "styled-components/native";
+import { GradientComponent } from "../../components/gradient/GradientComponent.jsx";
+import { ButtonRegister } from "../../components/login/ButtonRegister.jsx";
 import { GoogleRegister } from "../../components/login/GoogleRegister.jsx";
 import { InputLogin } from "../../components/login/InputLogin.jsx";
+import { fetchLogin } from "../../hooks/Login.js";
 
 export default function Index() {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [successLoading, setSuccessLoading] = useState(false);
+
+  const {
+    mutate: login,
+    data,
+    isLoading,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: () => fetchLogin(email, pass),
+
+    onSuccess: (result) => {
+      setSuccessLoading(true);
+
+      setTimeout(() => {
+        router.push("/(tabs)");
+      }, 1500);
+    },
+
+    isError: () => {
+      setSuccessLoading(false);
+    },
+  });
+
+  if (successLoading) {
+    return (
+      <SuccessContainer>
+        <ActivityIndicator size="large" color="#8e0ff6" />
+        <SuccessText>Checking credentials...</SuccessText>
+      </SuccessContainer>
+    );
+  }
+
   return (
     <Container>
       <LoginContainer>
-        <LinearGradient
-          colors={["rgb(36, 36, 36)", "rgb(115, 26, 205)", "rgb(36, 36, 36)"]}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            height: "100%",
-            borderRadius: 20,
-          }}
-        />
+        <GradientComponent />
         <IconBack onPress={() => router.back()}>
           <MaterialIcons name="arrow-back" size={30} color="#ffffff" />
         </IconBack>
         <Texto>Welcome back</Texto>
-        <InputLogin />
+        <InputLogin email={email} setEmail={setEmail} pass={pass} setPass={setPass} />
         <ButtonLogContainer>
           <ButtonForgot
             onPress={() => {
@@ -33,23 +63,15 @@ export default function Index() {
           >
             <ForgotText>Forgot Password ?</ForgotText>
           </ButtonForgot>
-          <ButtonLogIn>
+          <ButtonLogIn onPress={() => login()}>
             <LogText>Sing in</LogText>
           </ButtonLogIn>
         </ButtonLogContainer>
-        <ButtonRegisContainer>
-          <TextRgister>Don`t have an account ?</TextRgister>
-          <ButtonRegister
-            onPress={() => {
-              router.push("/register");
-            }}
-          >
-            <ButtonText>Sing up</ButtonText>
-          </ButtonRegister>
-        </ButtonRegisContainer>
+        <ButtonRegister />
         <GoogleContainer>
           <GoogleRegister />
         </GoogleContainer>
+        {isError && <ErrorText>Failed to login try again</ErrorText>}
       </LoginContainer>
     </Container>
   );
@@ -127,31 +149,6 @@ const ForgotText = Styled.Text`
     color: #ffffff;
     text-align: right;
 `;
-const ButtonRegisContainer = Styled.View`
-    flex: 1;
-    width: 100%;
-    flex-direction: row;
-    position: absolute;
-    bottom: 170px;
-`;
-const TextRgister = Styled.Text`
-    flex:1;
-    alint-item: center;
-    font-size: 12px;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: left;
-    margin-left: 25px;
-    margin-top: 2px;  
-`;
-const ButtonRegister = Styled.TouchableOpacity` 
-`;
-const ButtonText = Styled.Text`
-    font-size: 13px;
-    font-weight: bold;
-    color: #fbfbfb;
-    margin-right: 140px;
-`;
 const GoogleContainer = Styled.View`
     flex: 1;
     width: 100%;
@@ -159,4 +156,24 @@ const GoogleContainer = Styled.View`
     margin-bottom: 1px;
     position: absolute;
     bottom: 80px;
+`;
+const ErrorText = Styled.Text`
+    font-size: 16px;
+    font-weight: bold;
+    color: #aa0f0f;
+    text-align: center;
+    margin: 10px;
+`;
+const SuccessContainer = Styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f0e0e;
+`;
+const SuccessText = Styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin: 10px;
 `;
