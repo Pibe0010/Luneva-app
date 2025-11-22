@@ -1,6 +1,6 @@
 import Styled from "styled-components/native";
 
-export function InputLogin() {
+export function InputLogin({ email, setEmail, pass, setPass }) {
   return (
     <Inputcontainer>
       <InputText
@@ -8,11 +8,15 @@ export function InputLogin() {
         placeholderTextColor="#ffffff"
         keyboardType="email-address"
         autoCapitalize="none"
+        onChangeText={setEmail}
+        value={email}
       />
       <InputPass
         placeholder="Password"
         placeholderTextColor="#ffffff"
         secureTextEntry={true}
+        onChangeText={setPass}
+        value={pass}
       />
     </Inputcontainer>
   );
