@@ -1,15 +1,32 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Animated, Dimensions, TouchableOpacity } from "react-native";
 import Styled from "styled-components/native";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { fetchLogout } from "../../hooks/Logout.js";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 export default function SideMenu() {
   const [visible, setVisible] = useState(false);
-
   const slideAnim = useRef(new Animated.Value(-200)).current;
+
+  const { logout: logoutContext } = useContext(AuthContext);
+
+  const {
+    mutate: logout,
+    isLoading,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: () => fetchLogout(),
+
+    onSuccess: async () => {
+      logoutContext();
+    },
+  });
 
   const openMenu = () => {
     setVisible(true);
@@ -59,7 +76,7 @@ export default function SideMenu() {
             <MaterialIcons name="account-box" size={25} color="#ffffff" />
           </IconContainer>
         </Option>
-        <Option onPress={() => console.log("Logout")}>
+        <Option onPress={() => logout()}>
           <OptionText>Logout</OptionText>
           <IconContainer>
             <MaterialIcons name="logout" size={25} color="#ffffff" />
@@ -111,4 +128,17 @@ const IconContainer = Styled.View`
   justify-content: center;
   position: absolute;
   right: -5px;
+`;
+const SuccessContainer = Styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;   
+`;
+const SuccessText = Styled.Text`
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    
+    
 `;

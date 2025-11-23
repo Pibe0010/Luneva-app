@@ -1,50 +1,33 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
-import { useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { useContext, useState } from "react";
 import Styled from "styled-components/native";
 import { GradientComponent } from "../../components/gradient/GradientComponent.jsx";
 import { ButtonRegister } from "../../components/login/ButtonRegister.jsx";
 import { GoogleRegister } from "../../components/login/GoogleRegister.jsx";
 import { InputLogin } from "../../components/login/InputLogin.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import { fetchLogin } from "../../hooks/Login.js";
 
 export default function Index() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [successLoading, setSuccessLoading] = useState(false);
+
+  const { login: loginContext } = useContext(AuthContext);
 
   const {
     mutate: login,
-    data,
     isLoading,
     isError,
     error,
   } = useMutation({
     mutationFn: () => fetchLogin(email, pass),
 
-    onSuccess: (result) => {
-      setSuccessLoading(true);
-
-      setTimeout(() => {
-        router.push("/(tabs)");
-      }, 1500);
-    },
-
-    isError: () => {
-      setSuccessLoading(false);
+    onSuccess: async (token) => {
+      loginContext(token);
     },
   });
-
-  if (successLoading) {
-    return (
-      <SuccessContainer>
-        <ActivityIndicator size="large" color="#8e0ff6" />
-        <SuccessText>Checking credentials...</SuccessText>
-      </SuccessContainer>
-    );
-  }
 
   return (
     <Container>
@@ -161,19 +144,6 @@ const ErrorText = Styled.Text`
     font-size: 16px;
     font-weight: bold;
     color: #aa0f0f;
-    text-align: center;
-    margin: 10px;
-`;
-const SuccessContainer = Styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    background-color: #0f0e0e;
-`;
-const SuccessText = Styled.Text`
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffffff;
     text-align: center;
     margin: 10px;
 `;
