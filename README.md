@@ -45,6 +45,7 @@ TanStack Query Fetch + data caching
 Styled Components Modern styles
 Node + MySQL (Custom backend) Product API
 react-native-dropdown-picker Interactive menus
+expo-secure-store Secure storage for tokens
 📲 Installation and execution
 
 Clone the repo:
@@ -72,8 +73,12 @@ Luneva-app/
 │ └── login/ # Authentication
 │
 ├── components/ # Reusable UI
+├── context/ # Global state
 ├── hooks/ # Fetch and logic
+└── middlewares/ # Fetch and logic
+├── components/ # Reusable UI
 ├── style/ # Global styles
+├── utils/ # Utils
 └── assets/ # Images, icons
 
 🔧 Useful Scripts
