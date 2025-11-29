@@ -7,7 +7,7 @@ import { useProtectedRoute } from "../middleware/useProtectedRoute.js";
 const queryClient = new QueryClient();
 
 function ProtectedLayout() {
-  useProtectedRoute(); // ⬅️ Protege rutas automáticamente
+  useProtectedRoute();
 
   return (
     <Stack screenOptions={{ headerShown: false }}>

@@ -5,6 +5,7 @@ import { Header } from "../../components/header/Header.jsx";
 import { HomeInfo } from "../../components/home/HomeInfo.jsx";
 import { ProductsStock } from "../../components/home/ProductsStock.jsx";
 import { SearchProduct } from "../../components/home/SearchProduct.jsx";
+import { ProductList } from "../../components/products/ProductsList.jsx";
 import { globalStyles } from "../../style/globalStyles.jsx";
 
 export default function Index() {
@@ -25,6 +26,7 @@ export default function Index() {
             <LoginButtonText>Sing in</LoginButtonText>
           </LoginButton>
         </LoginContainer>
+        <ProductList />
         <HomeInfo />
       </Scroll>
     </Container>

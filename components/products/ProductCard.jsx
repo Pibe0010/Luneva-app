@@ -10,18 +10,20 @@ export function ProductCard({ product }) {
       <CardContainer>
         <ImageContainer>
           {product.image_one ? (
-            <CardImage source={{ uri: `${apiUrl}/products/${product.image_one}` }} />
+            <CardImage
+              source={{ uri: `${apiUrl}/products/${product.image_one}` }}
+              resizeMode="contain"
+            />
           ) : (
             <NotImage>
-              <MaterialIcons name="image" size={150} color="#ffffff" />
+              <MaterialIcons name="image" size={130} color="#ffffff" />
             </NotImage>
           )}
         </ImageContainer>
         <Title>{product.name}</Title>
-        <Description>{product.description}</Description>
         <InfoContainer>
-          <Price>Price: {product.price} Kr</Price>
           <Stock>Stock: {product.Stock}</Stock>
+          <Price>Price: {product.price} Kr</Price>
         </InfoContainer>
         <AddToCart>
           <ButtonTitle>Add to cart</ButtonTitle>
@@ -36,23 +38,19 @@ const Container = Styled.View`
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 180px;
     border: 2px solid #fefefe;
     padding: 10px;
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: #646265;
 `;
-
 const CardContainer = Styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
-    padding: 10px;
-  
-    
+    width: 100%;  
 `;
 const ImageContainer = Styled.View`
     flex: 1;
@@ -65,24 +63,20 @@ const ImageContainer = Styled.View`
 `;
 const CardImage = Styled.Image`
     width: 100%;
-    height: 100%;
-    object-fix: contain;    
 `;
 const NotImage = Styled.View`
     width: 100%;
     height: 100%;    
     justify-content: center;
     align-items: center;
-    object-fix: contain;
 `;
-
 const Title = Styled.Text`
     font-size: 20px;
     font-weight: bold;
     color: #fbfbfb;
 `;
 const InfoContainer = Styled.View`
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
@@ -91,14 +85,6 @@ const Price = Styled.Text`
     font-size: 16px;
     font-weight: bold;
     color: #fbfbfb;
-`;
-const Description = Styled.Text`
-    font-size: 15px;
-    font-weight: bold;
-    color: #fbfbfb;
-    width: 100%;
-    text-align: center;
-
 `;
 const Stock = Styled.Text`
     font-size: 16px;

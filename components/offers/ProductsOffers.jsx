@@ -14,7 +14,7 @@ export default function ProductsOffers({ textFooterInfo, textHeaderInfo }) {
   if (isLoading)
     return (
       <LoadCointainer>
-        <ActivityIndicator size="large" color="#5e06af" />;
+        <ActivityIndicator size="large" color="#5e06af" />
       </LoadCointainer>
     );
 

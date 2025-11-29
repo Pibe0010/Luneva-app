@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { ActivityIndicator, Text } from "react-native";
+import { router } from "expo-router";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 import Styled from "styled-components/native";
 import { fetchProducts } from "../../hooks/Products.js";
 import { ProductCard } from "./ProductCard.jsx";
@@ -13,7 +14,7 @@ export function ProductList() {
   if (isLoading)
     return (
       <LoadCointainer>
-        <ActivityIndicator size="large" color="#5e06af" />;
+        <ActivityIndicator size="large" color="#5e06af" />
       </LoadCointainer>
     );
 
@@ -21,20 +22,30 @@ export function ProductList() {
 
   const allProducts = data.data;
 
-  const renderItem = ({ item }) => <ProductCard product={item} />;
+  const renderItem = ({ item: data }) => (
+    <TouchableOpacity
+      onPress={() =>
+        router.push({
+          pathname: `/searchProductActive`,
+          params: { data: JSON.stringify(data) },
+        })
+      }
+    >
+      <ProductCard product={data} />
+    </TouchableOpacity>
+  );
 
-  const firtsFour = allProducts.slice(0, 4);
   return (
     <SectionLists>
       <List
-        data={firtsFour}
+        data={allProducts}
         renderItem={renderItem}
         keyExtractor={(item) => item.ID_product}
         ListHeaderComponent={() => <ListHeader>Products</ListHeader>}
-        ListFooterComponent={() => (
-          <ListFooter>More products in the products section</ListFooter>
-        )}
+        ListFooterComponent={() => <ListFooter>Take care of your skin</ListFooter>}
         scrollEnabled={false}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-around" }}
       />
     </SectionLists>
   );
@@ -43,8 +54,6 @@ export function ProductList() {
 const List = Styled.FlatList`
     flex: 1;
     width: 100%;
-    padding: 10px;
-    gap: 10px;   
 `;
 const ListHeader = Styled.Text`
     font-size: 20px;

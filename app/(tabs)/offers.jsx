@@ -16,7 +16,7 @@ export default function Offers() {
   if (isLoading)
     return (
       <LoadCointainer>
-        <ActivityIndicator size="large" color="#5e06af" />;
+        <ActivityIndicator size="large" color="#5e06af" />
       </LoadCointainer>
     );
 
