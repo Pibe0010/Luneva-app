@@ -1,5 +1,5 @@
-export const LightTheme = {
-  color: {
+export const Mode = {
+  light: {
     primary: "#7507f3",
     secondary: "#03dac6",
     Background: "#f5f5f5",
@@ -8,16 +8,13 @@ export const LightTheme = {
       Background: "#6200ee",
       Text: "#0f0e0e",
     },
+    fonts: {
+      large: "20px",
+      medium: "16px",
+      small: "12px",
+    },
   },
-  fonts: {
-    large: "20px",
-    medium: "16px",
-    small: "12px",
-  },
-};
-
-export const DarkTheme = {
-  color: {
+  dark: {
     primary: "#7507f3",
     secondary: "#03dac6",
     Background: "#0f0e0e",
@@ -26,10 +23,10 @@ export const DarkTheme = {
       Background: "#bb86fc",
       Text: "#ffffff",
     },
-  },
-  fonts: {
-    large: "20px",
-    medium: "16px",
-    small: "12px",
+    fonts: {
+      large: "20px",
+      medium: "16px",
+      small: "12px",
+    },
   },
 };
