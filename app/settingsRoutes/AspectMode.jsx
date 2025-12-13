@@ -1,12 +1,13 @@
 import * as NavigationBar from "expo-navigation-bar";
 import { useEffect } from "react";
 import Styled from "styled-components/native";
+import { RadioOption } from "../../components/settingsComponent/RadioButton.jsx";
 import { ToggleSwitch } from "../../components/settingsComponent/Switch.jsx";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { globalStyles } from "../../style/globalStyles.jsx";
 
 export default function AspectMode() {
-  const { theme } = useTheme();
+  const { mode, setMode, theme } = useTheme();
 
   useEffect(() => {
     NavigationBar.setButtonStyleAsync(theme === "dark" ? "light" : "dark");
@@ -19,9 +20,26 @@ export default function AspectMode() {
   return (
     <Container style={globalStyles.container}>
       <ToggleSwitch />
-      <TextSW>Modo dark</TextSW>
-      <TextSW>Modo ligth</TextSW>
-      <TextSW>Modo sistem</TextSW>
+      <RadioOption
+        label="Dark mode"
+        value="dark"
+        selected={mode === "dark"}
+        onSelect={setMode}
+      />
+
+      <RadioOption
+        label="Light mode"
+        value="light"
+        selected={mode === "light"}
+        onSelect={setMode}
+      />
+
+      <RadioOption
+        label="System mode"
+        value="system"
+        selected={mode === "system"}
+        onSelect={setMode}
+      />
     </Container>
   );
 }
@@ -31,11 +49,5 @@ const Container = Styled.View`
     align-items: center;
     background-color: ${({ theme }) => theme.Background};
     width: 100%;
-`;
-const TextSW = Styled.Text`
-    font-size: 20px;
-    font-weight: bold;
-    color: ${({ theme }) => theme.text};
-    text-align: center;
-    margin: 20px;
+    padding: 5px;
 `;
