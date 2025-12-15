@@ -57,13 +57,13 @@ const List = Styled.FlatList`
 const ListHeader = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
     margin-bottom: 30px;
 `;
 const ListFooter = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
     text-align: center;
     margin: 10px;
 `;

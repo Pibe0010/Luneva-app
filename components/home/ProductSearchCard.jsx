@@ -1,9 +1,13 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import Styled from "styled-components/native";
+import { useTheme } from "../../context/ThemeContext.jsx";
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export const ProductSearchCard = ({ data }) => {
+  const { theme } = useTheme();
+  const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
+
   return (
     <SearchcardContainer
       onPress={() =>
@@ -18,7 +22,7 @@ export const ProductSearchCard = ({ data }) => {
           <ImageCard source={{ uri: `${apiUrl}/products/${data.image_one}` }} />
         ) : (
           <NotImage>
-            <MaterialIcons name="image" size={100} color="#ffffff" />
+            <MaterialIcons name="image" size={100} color={iconModeColor} />
           </NotImage>
         )}
       </ImageContainer>
@@ -39,7 +43,7 @@ const SearchcardContainer = Styled.TouchableOpacity`
     height: 100px;
     border-radius: 20px;
     margin-bottom: 15px;
-    background-color: #646265;
+    background-color: ${({ theme }) => theme.backgroundProduct};
 
 `;
 const ImageContainer = Styled.View`
@@ -61,7 +65,7 @@ const NotImage = Styled.View`
 const CardTitle = Styled.Text`
     font-size: 17px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
 `;
 const CardInfo = Styled.View`
     flex: 1;

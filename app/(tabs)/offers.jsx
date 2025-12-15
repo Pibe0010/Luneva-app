@@ -42,7 +42,7 @@ const Container = Styled.View`
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #0f0e0e;
+    background-color: ${({ theme }) => theme.Background};
     position: relative; 
 `;
 
@@ -58,7 +58,7 @@ const Scroll = Styled.ScrollView`
 const Title = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
     margin: 10px;
 `;
 const LoadCointainer = Styled.View`

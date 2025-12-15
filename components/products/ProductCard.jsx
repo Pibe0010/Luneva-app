@@ -1,8 +1,12 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import Styled from "styled-components/native";
+import { useTheme } from "../../context/ThemeContext.jsx";
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export function ProductCard({ product }) {
+  const { theme } = useTheme();
+  const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
+
   if (!product) return null;
 
   return (
@@ -16,7 +20,7 @@ export function ProductCard({ product }) {
             />
           ) : (
             <NotImage>
-              <MaterialIcons name="image" size={130} color="#ffffff" />
+              <MaterialIcons name="image" size={130} color={iconModeColor} />
             </NotImage>
           )}
         </ImageContainer>
@@ -39,11 +43,11 @@ const Container = Styled.View`
     align-items: center;
     gap: 10px;
     width: 180px;
-    border: 2px solid #fefefe;
+    border: 2px solid ${({ theme }) => theme.border};
     padding: 10px;
     border-radius: 20px;
     margin-bottom: 10px;
-    background-color: #646265;
+    background-color: ${({ theme }) => theme.backgroundProduct};
 `;
 const CardContainer = Styled.View`
     flex: 1;
@@ -57,7 +61,7 @@ const ImageContainer = Styled.View`
     justify-content: center;
     align-items: center;
     width: 100%;
-    border: 1px solid #fefefe;
+    border: 1px solid ${({ theme }) => theme.border};
     padding: 10px;
     border-radius: 15px;
 `;
@@ -73,7 +77,7 @@ const NotImage = Styled.View`
 const Title = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};
 `;
 const InfoContainer = Styled.View`
     flex-direction: column;
@@ -84,15 +88,15 @@ const InfoContainer = Styled.View`
 const Price = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};
 `;
 const Stock = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};
 `;
 const AddToCart = Styled.TouchableOpacity`
-    background-color: #6f20c9;
+    background-color: ${({ theme }) => theme.bgButtonCard};
     padding: 5px;
     border-radius: 10px;
     width: 90%;
@@ -100,7 +104,7 @@ const AddToCart = Styled.TouchableOpacity`
 const ButtonTitle = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};
     text-align: center;
 
 `;
