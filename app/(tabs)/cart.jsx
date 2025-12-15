@@ -12,11 +12,11 @@ const Container = Styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: #0f0e0e; 
+    background-color: ${({ theme }) => theme.Background}; 
 `;
 const Texto = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
     text-align: center;
     margin: 20px;`;

@@ -19,7 +19,7 @@ const Container = Styled.View`
 const Texto = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
     text-align: center;
     margin: 20px;
 `;

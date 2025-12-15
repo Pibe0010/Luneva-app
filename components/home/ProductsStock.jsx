@@ -2,10 +2,14 @@ import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { ActivityIndicator, Text } from "react-native";
 import Styled from "styled-components/native";
+import { useTheme } from "../../context/ThemeContext.jsx";
 import { fetchOffers } from "../../hooks/Offers.js";
 import { fetchProducts } from "../../hooks/Products.js";
 
 export function ProductsStock() {
+  const { theme } = useTheme();
+  const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
@@ -34,7 +38,7 @@ export function ProductsStock() {
         ) : (
           <>
             <IconContainer>
-              <FontAwesome6 name="soap" size={27} color="#ffffff" />
+              <FontAwesome6 name="soap" size={27} color={iconModeColor} />
             </IconContainer>
             <InfoProductsText>
               <ProductsText>Products: </ProductsText>
@@ -51,7 +55,7 @@ export function ProductsStock() {
         ) : (
           <>
             <IconContainer>
-              <MaterialCommunityIcons name="offer" size={35} color="#ffffff" />
+              <MaterialCommunityIcons name="offer" size={35} color={iconModeColor} />
             </IconContainer>
             <InfoProductsText>
               <OffersText>Offers: </OffersText>
@@ -81,7 +85,7 @@ const Products = Styled.View`
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    background-color: rgba(126, 84, 173, 0.4);
+    background-color: ${({ theme }) => theme.backgroundInfoProducts};
     margin: 5px;
     height: 100px;
 `;
@@ -90,7 +94,7 @@ const Offers = Styled.View`
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    background-color: rgba(126, 84, 173, 0.4);
+    background-color: ${({ theme }) => theme.backgroundInfoProducts};
     margin: 5px;
     height: 100px;
 `;
@@ -107,22 +111,22 @@ const InfoProductsText = Styled.View`
 const ProductsText = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
 `;
 const OffersText = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color:  ${({ theme }) => theme.text};;
 `;
 const TotalProducts = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color:  ${({ theme }) => theme.text};;
 `;
 const TotalOffers = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color:  ${({ theme }) => theme.text};
 `;
 const LoadContainer = Styled.View`
     flex: 1;

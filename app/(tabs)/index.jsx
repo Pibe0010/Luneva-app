@@ -38,7 +38,7 @@ const Container = Styled.View`
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #0f0e0e;
+    background-color: ${({ theme }) => theme.Background};
     position: relative; 
 `;
 const Scroll = Styled.ScrollView`
@@ -54,7 +54,7 @@ const LoginContainer = Styled.View`
 const Logintext = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -62,8 +62,8 @@ const Logintext = Styled.Text`
 const LoginButton = Styled.TouchableOpacity`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
-    background-color: #5b2f8e;
+    color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }) => theme.bgButton};
     padding: 10px;
     border-radius: 10px;
     justify-content: center;
@@ -72,5 +72,5 @@ const LoginButton = Styled.TouchableOpacity`
 const LoginButtonText = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: ${({ theme }) => theme.text};
 `;

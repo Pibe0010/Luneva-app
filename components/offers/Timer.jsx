@@ -60,12 +60,12 @@ const DiscountContainer = Styled.View`
 const StartDiscount = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};
 `;
 const EndDiscount = Styled.Text`
   font-size: 16px;
   font-weight: bold;
-  color: #fbfbfb;
+  color: ${({ theme }) => theme.text};
 `;
 const Countdown = Styled.Text`
   font-size: 20px;
