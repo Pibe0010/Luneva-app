@@ -5,6 +5,7 @@ import { useContext, useRef, useState } from "react";
 import { Animated, Dimensions, TouchableOpacity } from "react-native";
 import Styled from "styled-components/native";
 import { AuthContext } from "../../context/AuthContext.jsx";
+import { useTheme } from "../../context/ThemeContext.jsx";
 import { fetchLogout } from "../../hooks/Logout.js";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -13,14 +14,12 @@ export default function SideMenu() {
   const [visible, setVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(-200)).current;
 
+  const { theme } = useTheme();
+  const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
+
   const { logout: logoutContext } = useContext(AuthContext);
 
-  const {
-    mutate: logout,
-    isLoading,
-    isError,
-    error,
-  } = useMutation({
+  const { mutate: logout } = useMutation({
     mutationFn: () => fetchLogout(),
 
     onSuccess: async () => {
@@ -67,19 +66,19 @@ export default function SideMenu() {
         <Option onPress={() => router.push("/login")}>
           <OptionText>Login</OptionText>
           <IconContainer>
-            <MaterialIcons name="login" size={25} color="#ffffff" />
+            <MaterialIcons name="login" size={25} color={iconModeColor} />
           </IconContainer>
         </Option>
         <Option onPress={() => router.push("/register")}>
           <OptionText>Register</OptionText>
           <IconContainer>
-            <MaterialIcons name="account-box" size={25} color="#ffffff" />
+            <MaterialIcons name="account-box" size={25} color={iconModeColor} />
           </IconContainer>
         </Option>
         <Option onPress={() => logout()}>
           <OptionText>Logout</OptionText>
           <IconContainer>
-            <MaterialIcons name="logout" size={25} color="#ffffff" />
+            <MaterialIcons name="logout" size={25} color={iconModeColor} />
           </IconContainer>
         </Option>
       </AnimatedMenu>
@@ -103,7 +102,7 @@ const AnimatedMenu = Styled(Animated.View)`
   top: 55px;
   width: 130px;
   padding: 15px;
-  background-color: #0f0e0e;
+  background-color: ${({ theme }) => theme.Background};
   border-radius: 12px;
   z-index: 10;
   elevation: 8;
@@ -120,7 +119,7 @@ const Option = Styled.TouchableOpacity`
 `;
 const OptionText = Styled.Text`
   font-size: 16px;
-  color: #fff;
+  color: ${({ theme }) => theme.text};
   width: 100%;
 `;
 const IconContainer = Styled.View`
@@ -128,17 +127,4 @@ const IconContainer = Styled.View`
   justify-content: center;
   position: absolute;
   right: -5px;
-`;
-const SuccessContainer = Styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;   
-`;
-const SuccessText = Styled.Text`
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-    
-    
 `;
