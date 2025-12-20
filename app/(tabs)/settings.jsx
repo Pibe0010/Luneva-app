@@ -2,9 +2,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import Styled from "styled-components";
 import { Header } from "../../components/header/Header.jsx";
+import { useTheme } from "../../context/ThemeContext.jsx";
 import { globalStyles } from "../../style/globalStyles.jsx";
 
 export default function Settings() {
+  const { theme } = useTheme();
+  const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
+
   const dataSettings = [
     { id: 1, name: "Aspect mode", route: "AspectMode", icon: "dark-mode" },
     { id: 2, name: "Notifications", route: "Notifications", icon: "notifications" },
@@ -29,7 +33,7 @@ export default function Settings() {
             key={item.id}
             onPress={() => router.push(`/settingsRoutes/${item.route}`)}
           >
-            <MaterialIcons name={item.icon} size={30} color="#ffffff" />
+            <MaterialIcons name={item.icon} size={30} color={iconModeColor} />
             <Texto>{item.name}</Texto>
           </Button>
         ))}
@@ -42,13 +46,13 @@ const Container = Styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #0f0e0e;
+  background-color: ${({ theme }) => theme.Background};
   width: 100%;
 `;
 const Texto = Styled.Text`
   font-size: 20px;
   font-weight: bold;
-  color: #ffffff;
+  color: ${({ theme }) => theme.text};
   text-align: center;
 `;
 const ButtonContainer = Styled.View`

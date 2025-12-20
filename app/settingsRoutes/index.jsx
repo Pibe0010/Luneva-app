@@ -13,6 +13,5 @@ const Container = Styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: #0f0e0e;
     width: 100%;
 `;
