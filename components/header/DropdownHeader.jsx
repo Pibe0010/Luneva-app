@@ -1,5 +1,4 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useContext, useRef, useState } from "react";
 import { Animated, Dimensions, TouchableOpacity } from "react-native";
@@ -19,13 +18,15 @@ export default function SideMenu() {
 
   const { logout: logoutContext } = useContext(AuthContext);
 
-  const { mutate: logout } = useMutation({
-    mutationFn: () => fetchLogout(),
-
-    onSuccess: async () => {
+  const handleLogout = async () => {
+    try {
+      await fetchLogout();
+    } catch (e) {
+      console.log(e, "error en logout");
+    } finally {
       logoutContext();
-    },
-  });
+    }
+  };
 
   const openMenu = () => {
     setVisible(true);
@@ -75,7 +76,7 @@ export default function SideMenu() {
             <MaterialIcons name="account-box" size={25} color={iconModeColor} />
           </IconContainer>
         </Option>
-        <Option onPress={() => logout()}>
+        <Option onPress={handleLogout}>
           <OptionText>Logout</OptionText>
           <IconContainer>
             <MaterialIcons name="logout" size={25} color={iconModeColor} />
