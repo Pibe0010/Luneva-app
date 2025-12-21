@@ -11,8 +11,11 @@ export const fetchCartDelete = async () => {
   return response.data;
 };
 
-export const fetchCartAdd = async () => {
-  const response = await axios.post(`${apiUrl}/trolley`);
+export const fetchCartAdd = async (id, amount) => {
+  const response = await axios.post(`${apiUrl}/trolley`, {
+    ID_product: id,
+    products_amount: amount,
+  });
   return response.data;
 };
 
@@ -21,7 +24,10 @@ export const fetchCartRemoveProduct = async (id) => {
   return response.data;
 };
 
-export const fetchCartUpdateProduct = async () => {
-  const response = await axios.put(`${apiUrl}/trolley/update`);
+export const fetchCartUpdateProduct = async (id, amount) => {
+  const response = await axios.put(`${apiUrl}/trolley/update`, {
+    ID_product: id,
+    products_amount: amount,
+  });
   return response.data;
 };

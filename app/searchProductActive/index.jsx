@@ -1,7 +1,8 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
-import { TouchableOpacity } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import Styled from "styled-components/native";
+import { ButtonAddProduct } from "../../components/Cart/ButtonAddProduct.jsx";
+import { Icon } from "../../components/IconComponent/Icon.jsx";
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function index() {
@@ -12,11 +13,7 @@ export default function index() {
 
   return (
     <Container>
-      <CloseContainer>
-        <TouchableOpacity onPress={() => router.back()}>
-          <MaterialIcons name="close" size={35} color="#ffffff" />
-        </TouchableOpacity>
-      </CloseContainer>
+      <Icon name="close" size={35} />
       <CardContainer>
         <ImageContainer>
           {product.image_one ? (
@@ -33,9 +30,7 @@ export default function index() {
           <Price>Price: {product.price} Kr</Price>
           <Stock>Stock: {product.Stock}</Stock>
         </InfoContainer>
-        <AddToCart onPress={() => router.push(`/cartShopping`)}>
-          <ButtonTitle>Add to cart</ButtonTitle>
-        </AddToCart>
+        <ButtonAddProduct product={product} />
       </CardContainer>
     </Container>
   );
@@ -44,13 +39,8 @@ export default function index() {
 const Container = Styled.View`
     flex: 1;
     width: 100%;
-    background-color: #0f0e0e;;
+    background-color: ${({ theme }) => theme.Background};
     justify-content: center;
-`;
-const CloseContainer = Styled.View`
-    position: absolute;
-    top: 60px;
-    right: 20px;
 `;
 const CardContainer = Styled.View`
     flex: 1;
@@ -83,7 +73,7 @@ const NotImage = Styled.View`
 const Title = Styled.Text`
     font-size: 30px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};
     margin: 10px 0;
 `;
 const InfoContainer = Styled.View`
@@ -102,7 +92,7 @@ const Price = Styled.Text`
 const Description = Styled.Text`
     font-size: 16px;
     font-weight: bold;
-    color: #fbfbfb;
+    color: ${({ theme }) => theme.text};;
     width: 100%;
     text-align: center;
     margin: 10px 0;
@@ -111,16 +101,4 @@ const Stock = Styled.Text`
     font-size: 16px;
     font-weight: bold;
     color: #fbfbfb;
-`;
-const AddToCart = Styled.TouchableOpacity`
-    background-color: #6f20c9;
-    padding: 5px;
-    border-radius: 10px;
-    width: 90%;
-`;
-const ButtonTitle = Styled.Text`
-    font-size: 16px;
-    font-weight: bold;
-    color: #fbfbfb;
-    text-align: center;
 `;
