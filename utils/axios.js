@@ -8,9 +8,11 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   const token = await SecureStore.getItemAsync("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+
+  if (token && typeof token === "string") {
+    config.headers.Authorization = `${token.trim()}`;
   }
+
   return config;
 });
 

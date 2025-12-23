@@ -1,12 +1,7 @@
-import axios from "axios";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+import api from "../utils/axios.js";
 
 export const fetchLogout = async () => {
-  const response = await axios.post(
-    `${apiUrl}/user/logout`,
-    {},
-    { withCredentials: true }
-  );
+  const response = await api.post(`/user/logout`, {}, { withCredentials: true });
 
   return response.data;
 };

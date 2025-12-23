@@ -5,7 +5,6 @@ import { Animated, Dimensions, TouchableOpacity } from "react-native";
 import Styled from "styled-components/native";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { useTheme } from "../../context/ThemeContext.jsx";
-import { fetchLogout } from "../../hooks/Logout.js";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -19,13 +18,7 @@ export default function SideMenu() {
   const { logout: logoutContext } = useContext(AuthContext);
 
   const handleLogout = async () => {
-    try {
-      await fetchLogout();
-    } catch (e) {
-      console.log(e, "error en logout");
-    } finally {
-      logoutContext();
-    }
+    logoutContext();
   };
 
   const openMenu = () => {
