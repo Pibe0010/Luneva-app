@@ -1,5 +1,4 @@
-import axios from "axios";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+import api from "../utils/axios.js";
 
 export const fetchLogin = async (email, pass) => {
   if (!email || email.trim() === "") {
@@ -9,7 +8,7 @@ export const fetchLogin = async (email, pass) => {
     throw new Error("Email or Password required");
   }
 
-  const response = await axios.post(`${apiUrl}/user/login`, {
+  const response = await api.post(`/user/login`, {
     email: email,
     password: pass,
   });
