@@ -1,10 +1,15 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Styled from "styled-components/native";
 import { fetchCartAdd } from "../../hooks/cart.js";
 
 export const ButtonAddProduct = ({ product }) => {
+  const queryClient = useQueryClient();
+
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ id, amount }) => fetchCartAdd(id, amount),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
+    },
   });
 
   const handleAddToCart = () => {

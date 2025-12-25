@@ -1,16 +1,40 @@
+import { useQuery } from "@tanstack/react-query";
+import { ActivityIndicator } from "react-native";
 import Styled from "styled-components/native";
 import { ProductCart } from "../../components/Cart/ProductsCart.jsx";
+import { fetchCartList } from "../../hooks/cart.js";
 import { globalStyles } from "../../style/globalStyles.jsx";
 
 export default function Cart() {
+  const {
+    data = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["cart"],
+    queryFn: fetchCartList,
+  });
+
+  if (isLoading)
+    return (
+      <Container>
+        <ActivityIndicator size="large" color="#5e06af" />
+      </Container>
+    );
+
+  if (isError) return <Texto>Error: {error.message}</Texto>;
+
+  const total = data.reduce((acc, p) => acc + p.price * p.products_amount, 0);
+
   return (
     <Container style={globalStyles.container}>
       <ProductsContainer>
-        <ProductCart />
+        <ProductCart products={data} />
       </ProductsContainer>
 
       <Footer>
-        <TotalPrice>Total: 1000 Kr</TotalPrice>
+        <TotalPrice>Total: {total} Kr</TotalPrice>
 
         <ButtonsContainer>
           <BuyButton onPress={() => {}}>
@@ -29,10 +53,12 @@ export default function Cart() {
 const Container = Styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.Background};
+  width: 100%;
 `;
 const ProductsContainer = Styled.View`
   flex: 1;
   padding: 10px;
+  width: 100%;
 `;
 const Footer = Styled.View`
   padding: 15px;
@@ -73,4 +99,11 @@ const TextCancel = Styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: ${({ theme }) => theme.text};
+`;
+const Texto = Styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.text};
+  text-align: center;
+  margin: 20px;
 `;
