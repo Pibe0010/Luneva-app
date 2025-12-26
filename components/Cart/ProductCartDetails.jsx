@@ -48,24 +48,23 @@ export const ProductCartDetails = ({ product }) => {
 
         <QuantityRow>
           <Icon
-            disabled={product.products_amount <= 1}
             onPress={() =>
               updateQuantity.mutate({
                 ID_product: product.ID_product,
-                products_amount: String(product.products_amount - 1),
+                products_amount: String(-1),
               })
             }
           >
             <MaterialIcons name="remove" size={22} color={iconModeColor} />
           </Icon>
 
-          <Quantity>{product.products_amount}</Quantity>
+          <Quantity>{product.product_amount}</Quantity>
 
           <Icon
             onPress={() =>
               updateQuantity.mutate({
                 ID_product: product.ID_product,
-                products_amount: String(product.products_amount + 1),
+                products_amount: String(1),
               })
             }
           >
