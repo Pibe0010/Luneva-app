@@ -15,7 +15,6 @@ export default function Cart() {
     queryKey: ["cart"],
     queryFn: fetchCartList,
   });
-  console.log(data);
 
   if (isLoading)
     return (
