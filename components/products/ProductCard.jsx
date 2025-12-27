@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import Styled from "styled-components/native";
 import { useTheme } from "../../context/ThemeContext.jsx";
+import { ButtonAddProduct } from "../Cart/ButtonAddProduct.jsx";
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export function ProductCard({ product }) {
@@ -29,9 +30,8 @@ export function ProductCard({ product }) {
           <Stock>Stock: {product.Stock}</Stock>
           <Price>Price: {product.price} Kr</Price>
         </InfoContainer>
-        <AddToCart>
-          <ButtonTitle>Add to cart</ButtonTitle>
-        </AddToCart>
+
+        <ButtonAddProduct product={product} />
       </CardContainer>
     </Container>
   );
@@ -94,17 +94,4 @@ const Stock = Styled.Text`
     font-size: 16px;
     font-weight: bold;
     color: ${({ theme }) => theme.text};
-`;
-const AddToCart = Styled.TouchableOpacity`
-    background-color: ${({ theme }) => theme.bgButtonCard};
-    padding: 5px;
-    border-radius: 10px;
-    width: 90%;
-`;
-const ButtonTitle = Styled.Text`
-    font-size: 16px;
-    font-weight: bold;
-    color: ${({ theme }) => theme.text};
-    text-align: center;
-
 `;
