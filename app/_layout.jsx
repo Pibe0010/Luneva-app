@@ -4,8 +4,10 @@ import { StatusBar } from "expo-status-bar";
 import { useContext } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components/native";
 import { Splash } from "../components/loading/Splash.jsx";
+import { Toast } from "../components/ToastAlert/Toast.jsx";
 import AuthProvider, { AuthContext } from "../context/AuthContext.jsx";
 import { ThemeProvider, useTheme } from "../context/ThemeContext.jsx";
+import { ToastProvider } from "../context/ToastContext.jsx";
 import { useProtectedRoute } from "../middleware/useProtectedRoute.js";
 import { Mode } from "../style/theme.jsx";
 const queryClient = new QueryClient();
@@ -48,7 +50,10 @@ export default function RootLayout() {
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
           <AppThemeWrapper>
-            <LayoutWithLoading />
+            <ToastProvider>
+              <Toast />
+              <LayoutWithLoading />
+            </ToastProvider>
           </AppThemeWrapper>
         </QueryClientProvider>
       </ThemeProvider>
