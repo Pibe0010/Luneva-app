@@ -25,7 +25,7 @@ export default function Cart() {
 
   if (isError) return <Texto>Error: {error.message}</Texto>;
 
-  const total = data.reduce((acc, p) => acc + p.price * p.products_amount, 0);
+  const total = data.reduce((acc, p) => acc + Number(p.price), 0);
 
   return (
     <Container style={globalStyles.container}>
