@@ -72,7 +72,7 @@ const Container = Styled(Animated.View)`
   right: 10px;
   z-index: 9999;
   elevation: 9999;
-  background-color: ${({ type }) => (type === "error" ? "#E53935" : "#6A1B9A")};
+  background-color: ${({ type }) => (type === "error" ? "#E53935" : "#5b5b5b")};
   padding: 14px;
   border-radius: 12px;
   flex-direction: row;
