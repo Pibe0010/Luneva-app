@@ -44,6 +44,7 @@ export const ProductCartDetails = ({ product }) => {
         <InfoContainer>
           <ProductName>{product.name}</ProductName>
           <ProductPrice>{product.price} Kr</ProductPrice>
+          {product.discout_rate && <OffertDetail>{product.discount_rate}%</OffertDetail>}
         </InfoContainer>
 
         <QuantityRow>
@@ -118,6 +119,11 @@ const ProductName = Styled.Text`
 `;
 const ProductPrice = Styled.Text`
   font-size: 14px;
+  color: ${({ theme }) => theme.text};
+  margin: 5px;
+`;
+const OffertDetail = Styled.Text`
+  font-size: 12px;
   color: ${({ theme }) => theme.text};
   margin: 5px;
 `;
