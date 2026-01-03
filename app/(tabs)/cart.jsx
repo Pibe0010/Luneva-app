@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ActivityIndicator } from "react-native";
 import Styled from "styled-components/native";
+import { ButtonCancelCart } from "../../components/Cart/ButtonCancelCart.jsx";
 import { ProductCart } from "../../components/Cart/ProductsCart.jsx";
 import { fetchCartList } from "../../hooks/cart.js";
 import { globalStyles } from "../../style/globalStyles.jsx";
@@ -41,9 +42,7 @@ export default function Cart() {
             <TextBuy>Buy</TextBuy>
           </BuyButton>
 
-          <CancelButton onPress={() => {}}>
-            <TextCancel>Cancel</TextCancel>
-          </CancelButton>
+          <ButtonCancelCart />
         </ButtonsContainer>
       </Footer>
     </Container>
@@ -83,19 +82,7 @@ const BuyButton = Styled.TouchableOpacity`
   width: 45%;
   align-items: center;
 `;
-const CancelButton = Styled.TouchableOpacity`
-  background-color: #e51818;
-  padding: 10px;
-  border-radius: 10px;
-  width: 45%;
-  align-items: center;
-`;
 const TextBuy = Styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.text};
-`;
-const TextCancel = Styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: ${({ theme }) => theme.text};
