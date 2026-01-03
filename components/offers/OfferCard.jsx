@@ -9,6 +9,9 @@ export function OfferCard({ offer }) {
   const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
 
   if (!offer) return null;
+  const end = new Date(offer.ending_date).getTime();
+  const now = Date.now();
+  const diff = end - now;
 
   return (
     <Container>
@@ -28,7 +31,7 @@ export function OfferCard({ offer }) {
           <Price>Price: {offer.price} Kr</Price>
           <Discount>Discount: {offer.discount_rate}%</Discount>
         </InfoContainer>
-        <ButtonAddProduct product={offer} />
+        {diff > 0 && <ButtonAddProduct product={offer} />}
       </CardContainer>
     </Container>
   );

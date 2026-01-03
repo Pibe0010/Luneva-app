@@ -25,7 +25,7 @@ export const Timer = ({ offer }) => {
       setTimeLeft(getTimeLeft());
     }, 1000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formatDate = (dateStr) => {
