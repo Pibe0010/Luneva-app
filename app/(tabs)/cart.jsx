@@ -26,7 +26,15 @@ export default function Cart() {
 
   if (isError) return <Texto>Error: {error.message}</Texto>;
 
-  const total = data.reduce((acc, p) => acc + Number(p.price), 0);
+  const total = data.reduce(
+    (acc, p) => acc + Number(p.price) * Number(p.products_amount),
+    0
+  );
+
+  const totalDiscount = data.reduce(
+    (acc, p) => acc + Number(p.discount_rate) * Number(p.products_amount),
+    0
+  );
 
   return (
     <Container style={globalStyles.container}>
@@ -36,6 +44,7 @@ export default function Cart() {
 
       <Footer>
         <TotalPrice>Total: {total} Kr</TotalPrice>
+        <Discount>{totalDiscount > 0 && `Discount: ${totalDiscount} Kr`}</Discount>
 
         <ButtonsContainer>
           <BuyButton onPress={() => {}}>
@@ -70,6 +79,14 @@ const TotalPrice = Styled.Text`
   color: ${({ theme }) => theme.text};
   text-align: center;
   margin-bottom: 10px;
+`;
+const Discount = Styled.Text`
+  font-size: 10px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.text};
+  text-align: center;
+  margin-bottom: 10px;
+  color: #00ff1e87;
 `;
 const ButtonsContainer = Styled.View`
   flex-direction: row;

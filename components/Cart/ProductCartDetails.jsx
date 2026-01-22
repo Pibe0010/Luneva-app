@@ -44,8 +44,8 @@ export const ProductCartDetails = ({ product }) => {
         <InfoContainer>
           <ProductName>{product.name}</ProductName>
           <ProductPrice>{product.price} Kr</ProductPrice>
-          {product.product_discount && (
-            <OffertDetail>{product.product_discount} Kr</OffertDetail>
+          {product.discount_rate && (
+            <OffertDetail>{product.discount_rate} %</OffertDetail>
           )}
         </InfoContainer>
 
@@ -61,7 +61,7 @@ export const ProductCartDetails = ({ product }) => {
             <MaterialIcons name="remove" size={22} color={iconModeColor} />
           </Icon>
 
-          <Quantity>{product.product_amount}</Quantity>
+          <Quantity>{product.products_amount}</Quantity>
 
           <Icon
             onPress={() =>
