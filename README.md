@@ -43,7 +43,7 @@ Expo Development, deployment, native libraries
 Expo Router Advanced navigation
 TanStack Query Fetch + data caching
 Styled Components Modern styles
-Node + MySQL (Custom backend) Product API
+Supabase ProgreSQL (Data base)
 react-native-dropdown-picker Interactive menus
 expo-secure-store Secure storage for tokens
 📲 Installation and execution
@@ -79,6 +79,7 @@ Luneva-app/
 ├── components/ # Reusable UI
 ├── style/ # Global styles
 ├── utils/ # Utils
+├── supabase # Configuration
 └── assets/ # Images, icons
 
 🔧 Useful Scripts
