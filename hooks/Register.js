@@ -1,17 +1,19 @@
-import axios from "axios";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+import supabase from "../supabase/Supabase.js";
 
 export const fetchRegisterUser = async (name, lastName, email, pass) => {
-  if (!name || name.trim() === "") return [];
-  if (!lastName || lastName.trim() === "") return [];
-  if (!email || email.trim() === "") return [];
-  if (!pass || pass.trim() === "") return [];
-
-  const response = await axios.post(`${apiUrl}/user/register`, {
-    user_name: name,
-    last_name: lastName,
-    email: email,
+  const { data, error } = await supabase.auth.signUp({
+    email,
     password: pass,
+    options: {
+      data: {
+        user_name: name,
+        last_name: lastName,
+        active: true,
+        avatar: "",
+      },
+    },
   });
-  return response.data;
+
+  if (error) throw error;
+  return data;
 };
