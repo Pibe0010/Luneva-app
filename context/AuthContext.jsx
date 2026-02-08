@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const login = async (token) => {
-    await SecureStore.setItemAsync("token", token);
+    await SecureStore.setItemAsync("token", JSON.stringify(token));
     setAuthenticated(true);
     router.replace("/(tabs)");
   };

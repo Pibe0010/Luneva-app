@@ -1,4 +1,4 @@
-import api from "../utils/axios.js";
+import supabase from "../supabase/Supabase.js";
 
 export const fetchLogin = async (email, pass) => {
   if (!email || email.trim() === "") {
@@ -8,10 +8,12 @@ export const fetchLogin = async (email, pass) => {
     throw new Error("Email or Password required");
   }
 
-  const response = await api.post(`/user/login`, {
-    email: email,
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
     password: pass,
   });
 
-  return response.data.data;
+  if (error) throw error;
+
+  return data;
 };
