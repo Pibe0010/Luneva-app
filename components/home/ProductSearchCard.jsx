@@ -2,7 +2,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import Styled from "styled-components/native";
 import { useTheme } from "../../context/ThemeContext.jsx";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export const ProductSearchCard = ({ data }) => {
   const { theme } = useTheme();
@@ -19,7 +18,7 @@ export const ProductSearchCard = ({ data }) => {
     >
       <ImageContainer>
         {data.image_one ? (
-          <ImageCard source={{ uri: `${apiUrl}/products/${data.image_one}` }} />
+          <ImageCard source={{ uri: `${data.image_one}` }} />
         ) : (
           <NotImage>
             <MaterialIcons name="image" size={100} color={iconModeColor} />

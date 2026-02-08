@@ -20,7 +20,7 @@ export function ProductList() {
 
   if (isError) return <Text>Error: {error.message}</Text>;
 
-  const allProducts = data.data;
+  const allProducts = data;
 
   const renderItem = ({ item: data }) => (
     <TouchableOpacity
@@ -40,7 +40,7 @@ export function ProductList() {
       <List
         data={allProducts}
         renderItem={renderItem}
-        keyExtractor={(item) => item.ID_product}
+        keyExtractor={(item) => item.id}
         ListHeaderComponent={() => <ListHeader>Products</ListHeader>}
         ListFooterComponent={() => <ListFooter>Take care of your skin</ListFooter>}
         scrollEnabled={false}
