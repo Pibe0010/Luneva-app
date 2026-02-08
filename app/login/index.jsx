@@ -46,7 +46,7 @@ export default function Index() {
           >
             <ForgotText>Forgot Password ?</ForgotText>
           </ButtonForgot>
-          <ButtonLogIn onPress={() => login()}>
+          <ButtonLogIn disabled={isLoading} onPress={() => login()}>
             <LogText>Sing in</LogText>
           </ButtonLogIn>
         </ButtonLogContainer>

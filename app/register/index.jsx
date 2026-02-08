@@ -32,7 +32,7 @@ export default function Index() {
       }, 1700);
     },
 
-    isError: () => {
+    onError: () => {
       setSuccessLoading(false);
     },
   });
@@ -65,7 +65,7 @@ export default function Index() {
           setPass={setPass}
         />
         <ButtonLogContainer>
-          <ButtonRegister onPress={() => register()}>
+          <ButtonRegister disabled={isLoading} onPress={() => register()}>
             <RegisterText>Register</RegisterText>
           </ButtonRegister>
         </ButtonLogContainer>
