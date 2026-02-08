@@ -2,7 +2,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Styled from "styled-components/native";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { ButtonAddProduct } from "../Cart/ButtonAddProduct.jsx";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export function ProductCard({ product }) {
   const { theme } = useTheme();
@@ -15,10 +14,7 @@ export function ProductCard({ product }) {
       <CardContainer>
         <ImageContainer>
           {product.image_one ? (
-            <CardImage
-              source={{ uri: `${apiUrl}/products/${product.image_one}` }}
-              resizeMode="contain"
-            />
+            <CardImage source={{ uri: `${product.image_one}` }} resizeMode="contain" />
           ) : (
             <NotImage>
               <MaterialIcons name="image" size={130} color={iconModeColor} />
@@ -27,7 +23,7 @@ export function ProductCard({ product }) {
         </ImageContainer>
         <Title>{product.name}</Title>
         <InfoContainer>
-          <Stock>Stock: {product.Stock}</Stock>
+          <Stock>Stock: {product.stock}</Stock>
           <Price>Price: {product.price} Kr</Price>
         </InfoContainer>
 

@@ -25,8 +25,8 @@ export function ProductsStock() {
     queryFn: fetchOffers,
   });
 
-  const totalProducts = data?.data?.length || 0;
-  const totalOffers = offers?.data?.length || 0;
+  const totalProducts = data?.length || 0;
+  const totalOffers = offers?.length || 0;
 
   return (
     <ProductsContainer>

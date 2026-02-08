@@ -3,7 +3,6 @@ import { useLocalSearchParams } from "expo-router";
 import Styled from "styled-components/native";
 import { ButtonAddProduct } from "../../components/Cart/ButtonAddProduct.jsx";
 import { Icon } from "../../components/IconComponent/Icon.jsx";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function index() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -17,7 +16,7 @@ export default function index() {
       <CardContainer>
         <ImageContainer>
           {product.image_one ? (
-            <CardImage source={{ uri: `${apiUrl}/products/${product.image_one}` }} />
+            <CardImage source={{ uri: `${product.image_one}` }} />
           ) : (
             <NotImage>
               <MaterialIcons name="image" size={220} color="#ffffff" />
@@ -28,7 +27,7 @@ export default function index() {
         <Description>{product.description}</Description>
         <InfoContainer>
           <Price>Price: {product.price} Kr</Price>
-          <Stock>Stock: {product.Stock}</Stock>
+          <Stock>Stock: {product.stock}</Stock>
         </InfoContainer>
         <ButtonAddProduct product={product} />
       </CardContainer>
