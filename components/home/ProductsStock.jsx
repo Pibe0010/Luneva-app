@@ -26,7 +26,7 @@ export function ProductsStock() {
   });
 
   const totalProducts = data?.length || 0;
-  const totalOffers = offers?.length || 0;
+  const totalOffers = offers?.filter((offer) => offer.active === true).length || 0;
 
   return (
     <ProductsContainer>

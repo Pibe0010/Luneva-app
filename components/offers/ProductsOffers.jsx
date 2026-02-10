@@ -1,26 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { ActivityIndicator, Text } from "react-native";
 import Styled from "styled-components/native";
-import { fetchOffers } from "../../hooks/Offers.js";
 import { globalStyles } from "../../style/globalStyles.jsx";
 import { OfferCard } from "./OfferCard.jsx";
 
-export default function ProductsOffers({ textFooterInfo, textHeaderInfo }) {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["Offers"],
-    queryFn: fetchOffers,
-  });
-
-  if (isLoading)
-    return (
-      <LoadCointainer>
-        <ActivityIndicator size="large" color="#5e06af" />
-      </LoadCointainer>
-    );
-
-  if (isError) return <Text>Error: {error.message}</Text>;
-
-  const allOffers = data.data;
+export default function ProductsOffers({ offers, textFooterInfo, textHeaderInfo }) {
+  const allOffers = offers;
 
   const renderItem = ({ item }) => <OfferCard offer={item} />;
 
@@ -31,7 +14,7 @@ export default function ProductsOffers({ textFooterInfo, textHeaderInfo }) {
       <List
         data={firtsFour}
         renderItem={renderItem}
-        keyExtractor={(item) => item.ID_offer}
+        keyExtractor={(item) => item.id}
         ListHeaderComponent={() => <ListHeader>{textHeaderInfo}</ListHeader>}
         ListFooterComponent={() => <ListFooter>{textFooterInfo}</ListFooter>}
         scrollEnabled={false}
@@ -41,12 +24,10 @@ export default function ProductsOffers({ textFooterInfo, textHeaderInfo }) {
 }
 
 const Container = Styled.View`
-    flex: 1;
     justify-content: center;
     align-items: center;
     gap: 20px;
     width: 100%;
-    margin-top: 20px;
 `;
 const List = Styled.FlatList`
     flex: 1;
@@ -57,8 +38,7 @@ const List = Styled.FlatList`
 const ListHeader = Styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: ${({ theme }) => theme.text};
-    margin-bottom: 30px;
+    color: ${({ theme }) => theme.text};  
 `;
 const ListFooter = Styled.Text`
     font-size: 20px;
@@ -66,9 +46,4 @@ const ListFooter = Styled.Text`
     color: ${({ theme }) => theme.text};
     text-align: center;
     margin: 10px;
-`;
-const LoadCointainer = Styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
 `;

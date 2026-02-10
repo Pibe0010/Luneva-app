@@ -3,7 +3,6 @@ import { ActivityIndicator, StatusBar, Text } from "react-native";
 import Styled from "styled-components/native";
 import { Header } from "../../components/header/Header.jsx";
 import ProductsOffers from "../../components/offers/ProductsOffers.jsx";
-import { Timer } from "../../components/offers/Timer.jsx";
 import { fetchOffers } from "../../hooks/Offers.js";
 import { globalStyles } from "../../style/globalStyles.jsx";
 
@@ -12,6 +11,8 @@ export default function Offers() {
     queryKey: ["Offers"],
     queryFn: fetchOffers,
   });
+
+  const activeOffers = data?.filter((offer) => offer.active === true);
 
   if (isLoading)
     return (
@@ -29,8 +30,11 @@ export default function Offers() {
       <Scroll>
         <Title>OFFERS</Title>
         <SectionLists>
-          <Timer offer={data.data[0]} />
-          <ProductsOffers textFooterInfo="" textHeaderInfo="" />
+          {activeOffers?.length > 0 ? (
+            <ProductsOffers offers={activeOffers} textFooterInfo="" textHeaderInfo="" />
+          ) : (
+            <Text>There are no active offers</Text>
+          )}
         </SectionLists>
       </Scroll>
     </Container>
@@ -39,27 +43,21 @@ export default function Offers() {
 
 const Container = Styled.View`
     flex: 1;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    background-color: ${({ theme }) => theme.Background};
-    position: relative; 
+    background-color: ${({ theme }) => theme.Background}; 
 `;
-
 const SectionLists = Styled.View`
-    flex: 1;
     width: 100%;
-    margin-top: 50px;
+    margin-top: -70px;
 `;
 const Scroll = Styled.ScrollView`
-    flex: 1;
     width: 100%;
 `;
 const Title = Styled.Text`
     font-size: 16px;
     font-weight: bold;
     color: ${({ theme }) => theme.text};
-    margin: 10px;
+    margin: 30px;
 `;
 const LoadCointainer = Styled.View`
     flex: 1;

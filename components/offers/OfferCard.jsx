@@ -2,34 +2,35 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Styled from "styled-components/native";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import { ButtonAddProduct } from "../Cart/ButtonAddProduct.jsx";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+import { Timer } from "./Timer.jsx";
 
 export function OfferCard({ offer }) {
   const { theme } = useTheme();
   const iconModeColor = theme === "dark" ? "#ffffff" : "#0f0e0e";
 
   if (!offer) return null;
-  const end = new Date(offer.ending_date).getTime();
+  const end = offer.ending_date ? new Date(offer.ending_date).getTime() : 0;
   const now = Date.now();
   const diff = end - now;
 
   return (
     <Container>
+      <Timer offer={offer} />
       <CardContainer>
         <ImageContainer>
-          {offer.image_one ? (
-            <CardImage source={{ uri: `${apiUrl}/products/${offer.image_one}` }} />
+          {offer.image_one_product ? (
+            <CardImage source={{ uri: `${offer.image_one_product}` }} />
           ) : (
             <NotImage>
               <MaterialIcons name="image" size={150} color={iconModeColor} />
             </NotImage>
           )}
         </ImageContainer>
-        <Title>{offer.name}</Title>
-        <Description>{offer.description}</Description>
+        <Title>{offer.name_product}</Title>
+        <Description>{offer.description_product}</Description>
         <InfoContainer>
-          <Price>Price: {offer.price} Kr</Price>
-          <Discount>Discount: {offer.discount_rate}%</Discount>
+          <Price>Price: {offer.price_product} Kr</Price>
+          <Discount>Discount: {offer.discount}%</Discount>
         </InfoContainer>
         {diff > 0 && <ButtonAddProduct product={offer} />}
       </CardContainer>
@@ -38,13 +39,10 @@ export function OfferCard({ offer }) {
 }
 
 const Container = Styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
     width: 100%;
+    margin-bottom: 20px;
 `;
-
 const CardContainer = Styled.View`
     flex: 1;
     justify-content: center;

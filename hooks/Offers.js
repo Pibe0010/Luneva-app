@@ -1,14 +1,20 @@
-import axios from "axios";
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+import supabase from "../supabase/Supabase.js";
 
 export const fetchOffers = async () => {
-  const response = await axios.get(`${apiUrl}/offers/list`);
-  return response.data;
+  const { data, error } = await supabase.from("offers").select("*");
+
+  if (error) throw error;
+  return data;
 };
 
 export const fetchSearchOffers = async (searchTerm) => {
-  const response = await axios.get(`${apiUrl}/offers/search`, {
-    params: { searchTerm: searchTerm },
-  });
-  return response.data;
+  if (!searchTerm || searchTerm.trim() === "") return [];
+
+  const { data, error } = await supabase
+    .from("offers")
+    .select("*")
+    .ilike("name", `%${searchTerm}%`);
+
+  if (error) throw error;
+  return data;
 };
