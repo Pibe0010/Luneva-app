@@ -53,9 +53,7 @@ const DiscountContainer = Styled.View`
     align-items: center;
     width: 100%;
     gap: 10px;
-    margin-top: 20px;
-    position: absolute;
-    top: -50px;
+    margin-bottom: 40px;
 `;
 const StartDiscount = Styled.Text`
     font-size: 16px;
