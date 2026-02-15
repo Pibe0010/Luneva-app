@@ -1,40 +1,53 @@
 import { router } from "expo-router";
-import * as SecureStore from "expo-secure-store";
 import { createContext, useEffect, useState } from "react";
+import supabase from "../supabase/Supabase";
+
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
-    async function loadSession() {
-      const token = await SecureStore.getItemAsync("token");
-
-      if (token) {
-        setAuthenticated(true);
-      }
-
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
       setLoading(false);
-    }
+    });
 
-    loadSession();
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const login = async (token) => {
-    await SecureStore.setItemAsync("token", JSON.stringify(token));
-    setAuthenticated(true);
+  const login = async (email, password) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) throw error;
     router.replace("/(tabs)");
   };
 
   const logout = async () => {
-    await SecureStore.deleteItemAsync("token");
-    setAuthenticated(false);
+    await supabase.auth.signOut();
+    setSession(null);
     router.replace("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ loading, authenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        loading,
+        session,
+        authenticated: !!session,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
