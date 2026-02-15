@@ -1,9 +1,12 @@
 import Styled from "styled-components/native";
 import { CardProfile } from "../../components/Profile/CardProfile.jsx";
+import { Header } from "../../components/header/Header.jsx";
+import { globalStyles } from "../../style/globalStyles.jsx";
 
 export default function Profile() {
   return (
-    <Container>
+    <Container style={globalStyles.container}>
+      <Header />
       <CardProfile />
     </Container>
   );
