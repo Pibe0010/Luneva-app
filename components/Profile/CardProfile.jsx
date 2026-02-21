@@ -1,12 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { ActivityIndicator, ScrollView } from "react-native";
 import Styled from "styled-components/native";
+import { fetchAddress } from "../../hooks/Address.js";
 import { fetchProfile } from "../../hooks/Profile.js";
 
 export const CardProfile = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profile"],
     queryFn: fetchProfile,
+  });
+
+  const { data: address = [] } = useQuery({
+    queryKey: ["address"],
+    queryFn: () => fetchAddress(),
   });
 
   if (isLoading)
@@ -27,21 +34,21 @@ export const CardProfile = () => {
           <LastName>Last Name: {data.last_name}</LastName>
           <Email>Email: {data.email}</Email>
           <Phone>Phone: {data.phone}</Phone>
-          <UpdateAccount onPress={() => {}}>
+          <UpdateAccount onPress={() => router.push("/profile/updateAccount")}>
             <UpdateText>Update account</UpdateText>
           </UpdateAccount>
         </Account>
         <TextTitle>Address</TextTitle>
         <Address>
-          <AddressName>Street: Calle de los pepitos </AddressName>
-          <AddressNumber>Street number: 1</AddressNumber>
-          <AddressFloor>Floor: 1</AddressFloor>
-          <AddressLadder>Ladder: 1</AddressLadder>
-          <AddressDoor>Door: 1</AddressDoor>
-          <AddressCity>City: Madrid</AddressCity>
-          <AddressPostalCode>Postal Code: 28001</AddressPostalCode>
-          <AddressCountry>Country: Spain</AddressCountry>
-          <UpdateAddress onPress={() => {}}>
+          <AddressName>Street: {address.address} </AddressName>
+          <AddressNumber>Street number: {address.street_number}</AddressNumber>
+          <AddressFloor>Floor: {address.floor}</AddressFloor>
+          <AddressLadder>Ladder: {address.ladder}</AddressLadder>
+          <AddressDoor>Door: {address.door}</AddressDoor>
+          <AddressCity>City: {address.city}</AddressCity>
+          <AddressPostalCode>Postal Code: {address.postal_code}</AddressPostalCode>
+          <AddressCountry>Country: {address.country}</AddressCountry>
+          <UpdateAddress onPress={() => router.push("/profile/updateAddress")}>
             <UpdateText>Update address</UpdateText>
           </UpdateAddress>
         </Address>
