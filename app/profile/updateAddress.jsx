@@ -14,4 +14,9 @@ const Container = Styled.View`
     align-items: center;
     background-color: ${({ theme }) => theme.Background}; 
 `;
-const Texto = Styled.Text``;
+const Texto = Styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.text};
+    text-align: center;
+`;
