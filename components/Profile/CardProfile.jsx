@@ -46,8 +46,8 @@ export const CardProfile = () => {
           <AddressLadder>Ladder: {address.ladder}</AddressLadder>
           <AddressDoor>Door: {address.door}</AddressDoor>
           <AddressCity>City: {address.city}</AddressCity>
-          <AddressPostalCode>Postal Code: {address.postal_code}</AddressPostalCode>
           <AddressCountry>Country: {address.country}</AddressCountry>
+          <AddressPostalCode>Postal Code: {address.postal_code}</AddressPostalCode>
           <UpdateAddress onPress={() => router.push("/profile/updateAddress")}>
             <UpdateText>Update address</UpdateText>
           </UpdateAddress>
