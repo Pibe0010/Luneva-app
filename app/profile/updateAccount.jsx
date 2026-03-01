@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -14,6 +14,8 @@ export default function UpdateAccount() {
   const [phone, setPhone] = useState("");
   const [successLoading, setSuccessLoading] = useState(false);
 
+  const queryClient = useQueryClient();
+
   const {
     mutate: update,
     isLoading,
@@ -23,6 +25,7 @@ export default function UpdateAccount() {
     mutationFn: () => updateProfile({ name, lastName, email, phone }),
 
     onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
       setSuccessLoading(true);
       setTimeout(() => {
         router.back();
