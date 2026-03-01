@@ -10,6 +10,7 @@ export const Mode = {
     backgroundInfoProducts: "rgba(144, 68, 238, 0.373)",
     bgButton: "#e6d6f8",
     bgButtonCard: "rgba(176, 114, 207, 0.549)",
+    bgButtonForm: "#900ef9",
   },
 
   dark: {
@@ -23,5 +24,6 @@ export const Mode = {
     backgroundInfoProducts: "#741ead",
     bgButton: "#5b2f8e",
     bgButtonCard: "#6f20c9",
+    bgButtonForm: "#3e0969",
   },
 };
